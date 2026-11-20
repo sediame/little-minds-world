@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#8fd8ff"><title>Little Minds World — Learning Adventures</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body data-view="loading">
+<noscript><p class="form-error">Little Minds World needs JavaScript to run.</p></noscript>
+<div class="boot-splash" role="status"><span class="brand-icon" aria-hidden="true">📖</span><p>Loading Little Minds World…</p></div>
+
+<div class="auth-screen" id="auth-screen">
+  <section class="auth-hero" aria-labelledby="auth-headline">
+    <div class="brand"><span class="brand-icon" aria-hidden="true">📖</span><span class="brand-name">Little Minds World</span></div>
+    <h1 id="auth-headline">Big stories. Bright minds. Six ways to grow.</h1>
+    <p class="auth-lead">A little world of personalised stories, playful picture missions and creative discoveries — made to grow with every child.</p>
+    <div class="auth-lab-grid" aria-label="Explore the six learning labs">
+      <span class="auth-lab-chip">🧠 Brain</span><span class="auth-lab-chip">🔬 Science</span>
+      <span class="auth-lab-chip">🎨 Creative</span><span class="auth-lab-chip">📖 Reading</span>
+      <span class="auth-lab-chip">🎯 Focus</span><span class="auth-lab-chip">🌍 Discovery</span>
+    </div>
+    <img class="auth-adventure-image" src="assets/little-minds-adventure.png" alt="A friendly fox and elephant exploring a magical storybook world with science, art, puzzles and space objects" width="1672" height="941" fetchpriority="high">
+    <p class="auth-parent-note">✨ Parent-guided adventures, with activities that fit your child’s age.</p>
+  </section>
+  <main class="auth-card" id="auth-card">
+    <div class="auth-tabs" role="tablist" aria-label="Log in or create an account">
+      <button type="button" role="tab" id="tab-login" aria-selected="true" aria-controls="login-form">Log in</button>
+      <button type="button" role="tab" id="tab-signup" aria-selected="false" aria-controls="signup-form" tabindex="-1">Create account</button>
+    </div>
+    <p class="form-notice" id="auth-notice" role="status"></p>
+    <p class="form-error" id="auth-error" role="alert"></p>
+
+    <form id="login-form" class="auth-form" role="tabpanel" aria-labelledby="tab-login" novalidate>
+      <h2>Welcome back</h2>
+      <label>Parent’s email<input class="field-input" id="login-email" type="email" autocomplete="email" inputmode="email" required></label>
+      <label>Password<span class="password-row"><input class="field-input" id="login-password" type="password" autocomplete="current-password" required><button type="button" class="small-button toggle-password" data-target="login-password" aria-pressed="false">Show</button></span></label>
+      <button class="primary-button" id="login-submit" type="submit">Log in</button>
+      <p class="auth-switch">New here? <button type="button" class="link-button" data-auth-tab="signup">Create an account</button></p>
+    </form>
+
+    <form id="signup-form" class="auth-form" role="tabpanel" aria-labelledby="tab-signup" novalidate hidden>
+      <div class="step-progress"><p class="step-label" id="step-label">Step 1 of 3</p><div class="step-bar" aria-hidden="true"><i></i><i></i><i></i></div></div>
+      <section class="step" data-step="1" aria-labelledby="step1-title">
+        <h2 id="step1-title" tabindex="-1">Create the parent account</h2>
+        <label>Parent’s email<input class="field-input" id="signup-email" type="email" autocomplete="email" inputmode="email" required></label>
+        <label>Password<span class="password-row"><input class="field-input" id="signup-password" type="password" autocomplete="new-password" minlength="8" aria-describedby="pw-hint" required><button type="button" class="small-button toggle-password" data-target="signup-password" aria-pressed="false">Show</button></span><small class="hint" id="pw-hint">Use at least 8 characters.</small></label>
+        <label class="check-row"><input id="signup-parent" type="checkbox"><span>I’m a parent or guardian, and I’m creating this account for my children.</span></label>
+      </section>
+      <section class="step" data-step="2" aria-labelledby="step2-title" hidden>
+        <h2 id="step2-title" tabindex="-1">How many children will play?</h2>
+        <div class="count-picker" id="count-picker" role="radiogroup" aria-labelledby="step2-title"></div>
+        <p class="hint">You can add or remove children later in the Parents area.</p>
+      </section>
+      <section class="step" data-step="3" aria-labelledby="step3-title" hidden>
+        <h2 id="step3-title" tabindex="-1">Tell us about each child</h2>
+        <p class="hint">A first name or nickname is enough. We use it to make stories that fit.</p>
+        <div id="signup-children" class="child-list"></div>
+      </section>
+      <div class="step-actions"><button type="button" class="small-button" id="step-back" hidden>Back</button><button type="submit" class="primary-button" id="step-next">Next</button></div>
+      <p class="auth-switch">Already have an account? <button type="button" class="link-button" data-auth-tab="login">Log in</button></p>
+    </form>
+  </main>
+</div>
+
+<div class="profile-screen" id="profile-screen">
+  <div class="profile-inner">
+    <div class="brand"><span class="brand-icon" aria-hidden="true">📖</span><span class="brand-name">Little Minds World</span></div>
+    <h1 id="profile-title" tabindex="-1">Who’s playing?</h1>
+    <p class="profile-lead">Tap your picture to start.</p>
+    <div class="profile-grid" id="profile-grid"></div>
+    <button class="small-button" id="profile-logout" type="button">Log out</button>
+  </div>
+</div>
+
+<div class="app-shell">
+  <header class="topbar">
+    <a class="brand" href="#home"><span class="brand-icon" aria-hidden="true">📖</span><span class="brand-name">Little Minds World</span></a>
+    <nav class="main-nav" aria-label="Main navigation">
+      <button class="nav-link active" data-page="home"><span class="nav-ico" aria-hidden="true">🏠</span><span class="nav-label">Home</span></button>
+      <button class="nav-link" data-page="activities"><span class="nav-ico" aria-hidden="true">🧩</span><span class="nav-label">Games</span></button>
+      <button class="nav-link" data-page="library"><span class="nav-ico" aria-hidden="true">📚</span><span class="nav-label">Stories</span></button>
+      <button class="nav-link" data-page="parents"><span class="nav-ico" aria-hidden="true">👨‍👩‍👧</span><span class="nav-label">Parents</span></button>
+      <button class="nav-link" data-page="settings"><span class="nav-ico" aria-hidden="true">⚙️</span><span class="nav-label">Settings</span></button>
+    </nav>
+    <button type="button" class="avatar" id="switch-child" aria-label="Switch child">🧒</button>
+  </header>
+  <main>
+    <section class="page active" id="home">
+      <section class="welcome-hero">
+        <div class="hero-copy"><h1 id="welcome-title">Hello, little explorer!</h1><p class="hero-subtitle">Make a story that stars you, then play games from it.</p><div class="hero-actions"><button class="primary-button hero-cta" type="button" data-scroll="create-panel">✨ Make my story</button><button class="small-button hero-watch" id="replay-welcome" type="button">▶ Watch the video</button></div></div>
+        <div class="hero-art" aria-hidden="true">
+          <svg class="hero-scene" viewBox="0 0 1200 480" preserveAspectRatio="xMaxYMax slice" focusable="false">
+            <g stroke="#2a2150" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+              <g stroke="#ffb703" stroke-width="7"><path d="M1130 92v-14M1130 228v14M1062 160h-14M1198 160h14M1082 112l-10-10M1178 208l10 10M1178 112l10-10M1082 208l-10 10"/></g>
+              <circle cx="1130" cy="160" r="40" fill="#ffd23f"/>
+              <path d="M690 120c-30 0-34-28-10-35 2-28 40-32 52-9 26-4 38 15 28 32-6 12-22 12-70 12z" fill="#fff"/>
+              <path d="M830 70c-24 0-27-22-8-28 2-22 32-25 41-7 20-3 30 12 22 25-5 10-17 10-55 10z" fill="#fff"/>
+              <path d="M-20 420C200 410 380 390 560 340S900 230 1060 262s140 40 160 50V500H-20z" fill="#7bd88f"/>
+              <rect x="693" y="262" width="14" height="52" rx="4" fill="#b9783f"/><circle cx="700" cy="238" r="38" fill="#2fa862"/>
+              <rect x="805" y="258" width="12" height="44" rx="4" fill="#b9783f"/><circle cx="811" cy="240" r="30" fill="#43c07a"/>
+              <path d="M-20 444C240 436 520 444 760 404s340-54 460-30V500H-20z" fill="#43c07a"/>
+              <path d="M-20 474C200 452 420 474 640 458s360-18 580-2V500H-20z" fill="#5ec5f2"/>
+              <path d="M180 478c40-8 80-6 120 0M760 470c50 6 100 4 150-4" fill="none" stroke="#fff" stroke-width="5"/>
+              <circle cx="560" cy="430" r="9" fill="#ff8fb8"/><circle cx="640" cy="414" r="9" fill="#ffd23f"/><circle cx="900" cy="398" r="9" fill="#ff6f61"/><circle cx="470" cy="436" r="9" fill="#fff"/>
+            </g>
+          </svg>
+          <div class="speech">Every adventure<br>starts with <strong>YOU!</strong></div>
+          <div class="hero-friends"><span class="hero-friend astro">🧑‍🚀</span><span class="hero-friend elephant">🐘</span></div>
+        </div>
+      </section>
+      <section class="create-panel panel" id="create-panel">
+        <div class="panel-heading"><span class="star" aria-hidden="true">🪄</span><div><h2>Create your story</h2><p>Pick what you love. We will write the adventure.</p></div></div>
+        <form id="story-form" class="story-form">
+          <label>🧒 Child's name<input id="child-name" maxlength="30" value="Haroon" required></label>
+          <label>🎂 Age<select id="age"><option value="3">3 years</option><option value="4">4 years</option><option value="5">5 years</option><option value="6" selected>6 years</option><option value="7">7 years</option><option value="8">8 years</option><option value="9">9 years</option><option value="10">10 years</option><option value="11">11 years</option></select></label>
+          <label>💖 I love<select id="interest"><option value="Animals">🐘 Animals</option><option value="Dinosaurs">🦕 Dinosaurs</option><option value="Space">🚀 Space</option><option value="Vehicles">🚂 Vehicles</option><option value="Nature">🌳 Nature</option><option value="Professions">🧑‍🚒 Helpers and jobs</option><option value="Ocean life">🐬 Ocean life</option><option value="Magic and fantasy">🐉 Magic and fantasy</option><option value="Sports">⚽ Sports</option></select></label>
+          <label>🗺️ Story world<select id="theme"><option value="Jungle">🌴 Jungle</option><option value="Nature">🌳 Nature</option><option value="Ocean">🌊 Ocean</option><option value="Space">🪐 Space</option><option value="Fantasy kingdom">🏰 Fantasy kingdom</option><option value="My town">🏘️ My town</option><option value="Under the sea">🐠 Under the sea</option></select></label>
+          <label>💬 Story language<select id="language"><option value="English">English</option><option value="German">Deutsch</option><option value="Arabic">العربية</option></select></label>
+          <label>📖 Reading level<select id="reading-level"><option value="Beginner">Beginner — short, simple sentences</option><option value="Growing">Growing — simple paragraphs</option><option value="Confident">Confident — richer vocabulary</option></select></label>
+          <button class="primary-button" id="create-button" type="submit">✨ Create My Story <span>›</span></button>
+        </form>
+        <p class="form-message" id="form-message" aria-live="polite"></p>
+      </section>
+      <section class="home-lower">
+        <article class="story-card panel"><h2><span aria-hidden="true">📖</span> Your latest story</h2><div class="story-content" id="latest-story"><div class="story-picture"><span>🐘</span><span>🌳</span><span>🦋</span></div><div><h3>Your adventure is waiting!</h3><p>Create a story with your favourite things and it will appear here.</p><button class="small-button" data-page-link="library">See my stories ›</button></div></div></article>
+        <article class="progress-card panel"><h2><span aria-hidden="true">🏆</span> Your stars</h2><div class="progress-ring" id="progress-ring"><span id="progress-percent">0%</span></div><p><b id="progress-count">0 of 6 Labs</b><br>Completed</p><p class="buddy-tip"><span class="buddy-face" aria-hidden="true">🦊</span><span class="buddy-tip-text"></span></p></article>
+      </section>
+      <aside class="learning-banner"><span class="bulb" aria-hidden="true">💡</span><div><h2>Learning through play</h2><p>Stories, reading, puzzles and art, all in one adventure.</p></div><strong>You can<br>do it! ⭐</strong></aside>
+    </section>
+
+    <section class="page" id="activities"><section class="activities-hero"><div><h1>Your story games</h1><p>Six picture games made from your story.</p></div><div class="activity-hero-art" aria-hidden="true">🧒🏻 📘 🐘</div></section>
+      <p class="buddy-tip buddy-tip-wide"><span class="buddy-face" aria-hidden="true">🦊</span><span class="buddy-tip-text"></span></p>
+      <div class="labs-grid">
+        <article class="lab-card teal"><div class="lab-title"><span class="lab-badge" aria-hidden="true">🧠</span><h2>Brain Lab</h2></div><p>Remember, match and solve!</p><div class="lab-art lab-art-visual brain-art" aria-hidden="true"><span>🧩</span><span>🧠</span><span>⭐</span></div><button data-lab="Brain Lab">🧩 Play games ›</button></article>
+        <article class="lab-card purple"><div class="lab-title"><span class="lab-badge" aria-hidden="true">🔬</span><h2>Science Lab</h2></div><p>Explore patterns and experiments!</p><div class="lab-art lab-art-visual science-art" aria-hidden="true"><span>🧪</span><span>🌈</span><span>⚗️</span></div><button data-lab="Science Lab">🔬 Explore ›</button></article>
+        <article class="lab-card pink"><div class="lab-title"><span class="lab-badge" aria-hidden="true">🎨</span><h2>Creative Lab</h2></div><p>Colour, draw and invent!</p><div class="lab-art lab-art-visual creative-art" aria-hidden="true"><span>🖍️</span><span>🦋</span><span>🎨</span></div><button data-lab="Creative Lab">🎨 Create ›</button></article>
+        <article class="lab-card green"><div class="lab-title"><span class="lab-badge" aria-hidden="true">📖</span><h2>Reading Lab</h2></div><p>Match letters, words and pictures!</p><div class="lab-art lab-art-visual reading-art" aria-hidden="true"><span>🔤</span><span>📚</span><span>🐻</span></div><button data-lab="Reading Lab">📚 Play with words ›</button></article>
+        <article class="lab-card orange"><div class="lab-title"><span class="lab-badge" aria-hidden="true">🎯</span><h2>Focus Lab</h2></div><p>Spot details and find differences!</p><div class="lab-art lab-art-visual focus-art" aria-hidden="true"><span>🔎</span><span>👀</span><span>✨</span></div><button data-lab="Focus Lab">🎯 Find it ›</button></article>
+        <article class="lab-card blue"><div class="lab-title"><span class="lab-badge" aria-hidden="true">🌍</span><h2>Discovery Lab</h2></div><p>Explore animals and nature!</p><div class="lab-art lab-art-visual discovery-art" aria-hidden="true"><span>🦊</span><span>🌳</span><span>🦋</span></div><button data-lab="Discovery Lab">🌿 Discover ›</button></article>
+      </div>
+      <section class="recommendation-panel panel" aria-labelledby="recommend-title">
+        <div class="panel-heading"><span class="star" aria-hidden="true">🎮</span><div><h2 id="recommend-title">Pick a picture game</h2><p>Six games inspired by your story.</p></div></div>
+        <div class="recommendation-intro" id="recommendation-intro">Create a story first. We will suggest playful activities that connect its characters, theme and learning opportunities.</div>
+        <div class="recommendation-grid" id="recommendation-grid"><div class="recommendation-empty">📚 Your story-linked lab suggestions will appear here.</div></div>
+        <p class="parent-approval-note">🔒 A grown-up reviews and approves suggested activities before they appear in the child's activity list.</p>
+      </section>
+      <section class="approved-panel panel">
+        <div class="panel-heading"><span class="star" aria-hidden="true">🌟</span><div><h2>Ready to play?</h2><p>Your grown-up unlocked these games.</p></div></div>
+        <div id="approved-labs" class="approved-list"><p class="muted">No activities approved yet.</p></div>
+      </section>
+      <div class="bottom-progress"><div><span aria-hidden="true">🏆</span> <b>Your stars</b></div><div class="bar"><i id="bottom-bar"></i></div><strong id="bottom-count">0 / 6 Labs</strong><em>Keep going! ⭐</em></div>
+    </section>
+
+    <section class="page" id="library"><section class="section-heading"><h1>My stories</h1><p>Every story you make is saved on this device.</p></section><div class="library-grid" id="library-grid"><div class="empty-state">📚<h2>No stories yet</h2><p>Your personalised adventures will appear here.</p><button class="primary-button" data-page-link="home">Create your first story</button></div></div></section>
+
+    <section class="page" id="parents">
+      <section class="section-heading"><h1>Parent Dashboard</h1><p>A simple overview of learning on this device.</p></section>
+      <section class="parent-panel family-panel" id="family-panel" aria-labelledby="family-heading">
+        <div class="family-head"><div><h2 id="family-heading">Your family</h2><p class="muted" id="family-email"></p></div><button class="small-button" id="edit-family" type="button">Edit children</button></div>
+        <ul class="family-list" id="family-list"></ul>
+        <p class="muted" id="progress-for"></p>
+      </section>
+      <div class="parent-stats" id="parent-stats"></div>
+      <div class="parent-grid">
+        <article class="panel parent-panel"><h2>📖 Reading development</h2><p id="reading-summary">No reading sessions yet.</p><div class="bar"><i id="reading-bar"></i></div><p class="muted" id="reading-detail">Listen to or read a story to begin tracking.</p></article>
+        <article class="panel parent-panel"><h2>🎯 Focus & attention</h2><p id="focus-summary">No focus activities yet.</p><div class="bar"><i id="focus-bar"></i></div><p class="muted">Completed Brain Lab and Executive Function activities.</p></article>
+        <article class="panel parent-panel"><h2>⭐ Activity history</h2><ul id="activity-history" class="history-list"><li>No activities completed yet.</li></ul></article>
+        <article class="panel parent-panel approval-panel"><h2>🛡️ Review suggested labs</h2><p class="muted">Approve or skip each suggested activity before your child starts.</p><div id="parent-recommendations"><p>No suggestions waiting for review.</p></div></article>
+        <article class="panel parent-panel"><h2>🛡️ Parent note</h2><p>Progress is stored locally in this browser. It is an informal activity record, not a diagnostic or formal reading assessment.</p></article>
+      </div>
+    </section>
+    <section class="page simple-page" id="settings"><div class="simple-card"><div class="big-emoji">⚙️</div><h1>Parent Settings</h1><p>This first version keeps saved stories in this browser on this device.</p><div class="privacy-note">🔒 <b>Child privacy:</b> Only a parent’s email is used to log in. For each child we keep a first name or nickname, age and interests so stories fit them. No child photos, locations or contact details are asked for. Stories and progress stay on this device.</div>
+      <div class="account-box"><p>Signed in as <b id="account-email"></b></p><div class="account-actions"><button class="small-button" id="logout-button" type="button">Log out</button><button class="small-button danger" id="delete-account-button" type="button">Delete my account</button></div></div><button class="small-button danger" id="clear-stories">Delete all saved stories</button></div></section>
+  </main>
+  <footer>Little Minds World <span>💛</span> Imagine. Discover. Think. Learn. Grow.</footer>
+</div>
+<div class="modal-backdrop" id="story-modal" hidden><article class="story-modal" role="dialog" aria-modal="true" aria-labelledby="story-title"><button class="close-modal" id="close-modal" aria-label="Close">×</button><p class="chip" id="story-meta">Your personal adventure</p><h1 id="story-title">A new adventure</h1><div class="story-body" id="story-body"></div><section class="illustration-tools"><div class="tool-heading"><div><h2><span aria-hidden="true">🎨</span> Bring each chapter to life</h2><p>Illustrations use the same character description throughout this story.</p></div><button class="small-button" id="illustrate-story">✨ Illustrate chapters</button></div><p class="muted" id="illustration-status" aria-live="polite">AI illustrations require an API key configured on your private server.</p><div class="chapter-art-grid" id="chapter-art-grid"></div></section>
+<section class="reading-tools"><h2><span aria-hidden="true">🎧</span> Reading Teacher</h2><p>Listen to the story, practise a word, then answer a question.</p><div class="reading-controls"><button class="small-button" id="speak-story">▶ Listen</button><button class="small-button" id="pause-speech">Ⅱ Pause</button><button class="small-button" id="stop-speech">■ Stop</button></div><label class="word-practice">Practise a word <span><input id="practice-word" placeholder="Choose a story word"><button class="small-button" id="speak-word">🔊 Hear word</button></span></label><p class="muted" id="reading-feedback" aria-live="polite"></p></section>
+<section class="talk-box"><h2><span aria-hidden="true">💬</span> Let's think together</h2><ul id="story-questions"></ul><div class="question-practice"><label for="answer-input">Your answer</label><textarea id="answer-input" rows="2" placeholder="Tell or write your answer…"></textarea><button class="small-button" id="submit-answer">Check my answer</button><p id="answer-feedback" aria-live="polite"></p></div></section><div class="modal-actions"><button class="small-button" id="read-again">↻ Read again</button><button class="primary-button" id="save-story">♡ Save this story</button></div></article></div>
+<div class="modal-backdrop" id="lab-modal" hidden><article class="story-modal lab-modal" role="dialog" aria-modal="true" aria-labelledby="lab-modal-title"><button class="close-modal" id="close-lab-modal" aria-label="Close">×</button><p class="chip">Your game</p><h1 id="lab-modal-title">Learning Lab</h1><p id="lab-modal-why"></p><div class="lab-mission-box"><h2>Let's play! 🎉</h2><p id="lab-modal-task"></p><p class="muted" id="lab-modal-skill"></p></div><div id="lab-game-stage" class="lab-game-stage"></div><p id="lab-game-feedback" class="lab-game-feedback" aria-live="polite">You can do it!</p><button class="primary-button" id="complete-lab" disabled>Finish mission ⭐</button></article></div>
+<div class="modal-backdrop" id="family-modal" hidden><article class="story-modal family-modal" role="dialog" aria-modal="true" aria-labelledby="family-title"><button class="close-modal" id="close-family" type="button" aria-label="Close">×</button><h1 id="family-title" tabindex="-1">Edit your children</h1><p class="muted">Saved stories and progress stay with each child.</p><p class="form-error" id="family-error" role="alert"></p><div id="family-children" class="child-list"></div><div class="modal-actions"><button class="small-button" id="add-child" type="button">＋ Add a child</button><button class="primary-button" id="save-family" type="button">Save changes</button></div></article></div>
+<div class="modal-backdrop" id="delete-modal" hidden><article class="story-modal delete-modal" role="dialog" aria-modal="true" aria-labelledby="delete-title"><button class="close-modal" id="close-delete" type="button" aria-label="Close">×</button><h1 id="delete-title" tabindex="-1">Delete your account?</h1><p>This removes your email, password and your children’s profiles from the server, and clears their stories and progress on this device. It can’t be undone.</p><p class="form-error" id="delete-error" role="alert"></p><label class="delete-label">Enter your password to confirm<input class="field-input" id="delete-password" type="password" autocomplete="current-password"></label><div class="modal-actions"><button class="small-button" id="cancel-delete" type="button">Keep my account</button><button class="small-button danger" id="confirm-delete" type="button">Delete everything</button></div></article></div>
+<div class="movie" id="welcome-movie" hidden role="dialog" aria-modal="true" aria-label="Welcome video from your animal friend">
+  <div class="movie-screen" id="movie-screen">
+    <div class="movie-sun" aria-hidden="true"></div>
+    <div class="movie-stage" id="movie-stage" aria-hidden="true"></div>
+    <p class="movie-caption" id="movie-caption" aria-live="polite"></p>
+  </div>
+  <div class="movie-controls">
+    <button class="small-button" id="movie-sound" type="button" aria-pressed="false">🔇 Sound off</button>
+    <button class="small-button" id="movie-pause" type="button">⏸ Pause</button>
+    <div class="movie-dots" id="movie-dots" aria-hidden="true"></div>
+    <button class="small-button" id="movie-skip" type="button">Skip ›</button>
+    <button class="small-button" id="movie-again" type="button" hidden>↻ Watch again</button>
+    <button class="primary-button" id="movie-go" type="button" hidden>Let’s go! ✨</button>
+  </div>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="script.js"></script>
+<script src="auth.js"></script>
+</body></html>
