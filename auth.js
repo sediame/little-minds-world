@@ -6,6 +6,28 @@
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 
+  if (document.body.dataset.staticDemo === 'true') {
+    document.body.dataset.view = 'auth';
+    const child = { id: 'pages-demo-child', name: 'Explorer', age: 6, interests: ['Animals'], avatar: '🦊' };
+    const user = { id: 'pages-demo', email: 'Browser demo', children: [child] };
+    $('#demo-start').addEventListener('click', () => {
+      document.body.dataset.view = 'app';
+      $('#switch-child').hidden = true;
+      $('#edit-family').hidden = true;
+      $('#account-box').hidden = true;
+      $('#family-email').textContent = 'Demo profile — stored only in this browser.';
+      $('#family-list').replaceChildren();
+      const item = document.createElement('li');
+      item.textContent = `${child.avatar} ${child.name} · ${child.age} years old`;
+      $('#family-list').append(item);
+      $('#illustrate-story').hidden = true;
+      $('#illustration-status').textContent = 'AI chapter illustrations are unavailable in this Pages demo.';
+      window.lmwApp.start(user, child);
+      window.lmwApp.welcome(user, child);
+    });
+    return;
+  }
+
   const INTERESTS = [
     ['Animals', '🐘', 'Animals'], ['Dinosaurs', '🦕', 'Dinosaurs'], ['Space', '🚀', 'Space'],
     ['Vehicles', '🚂', 'Vehicles'], ['Nature', '🌳', 'Nature'], ['Professions', '🧑‍🚒', 'Helpers and jobs'],

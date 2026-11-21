@@ -25,6 +25,12 @@
     <p class="auth-parent-note">✨ Parent-guided adventures, with activities that fit your child’s age.</p>
   </section>
   <main class="auth-card" id="auth-card">
+    <section class="pages-demo" id="pages-demo" aria-labelledby="pages-demo-heading">
+      <h2 id="pages-demo-heading">Welcome to the free demo!</h2>
+      <p>This demo runs in your browser. Stories and progress stay on this device. No account is needed.</p>
+      <p>AI stories, chapter illustrations and family accounts need a separately hosted server and are not available in this Pages demo.</p>
+      <button class="primary-button" id="demo-start" type="button">✨ Explore the demo</button>
+    </section>
     <div class="auth-tabs" role="tablist" aria-label="Log in or create an account">
       <button type="button" role="tab" id="tab-login" aria-selected="true" aria-controls="login-form">Log in</button>
       <button type="button" role="tab" id="tab-signup" aria-selected="false" aria-controls="signup-form" tabindex="-1">Create account</button>
@@ -171,8 +177,8 @@
         <article class="panel parent-panel"><h2>🛡️ Parent note</h2><p>Progress is stored locally in this browser. It is an informal activity record, not a diagnostic or formal reading assessment.</p></article>
       </div>
     </section>
-    <section class="page simple-page" id="settings"><div class="simple-card"><div class="big-emoji">⚙️</div><h1>Parent Settings</h1><p>This first version keeps saved stories in this browser on this device.</p><div class="privacy-note">🔒 <b>Child privacy:</b> Only a parent’s email is used to log in. For each child we keep a first name or nickname, age and interests so stories fit them. No child photos, locations or contact details are asked for. Stories and progress stay on this device.</div>
-      <div class="account-box"><p>Signed in as <b id="account-email"></b></p><div class="account-actions"><button class="small-button" id="logout-button" type="button">Log out</button><button class="small-button danger" id="delete-account-button" type="button">Delete my account</button></div></div><button class="small-button danger" id="clear-stories">Delete all saved stories</button></div></section>
+    <section class="page simple-page" id="settings"><div class="simple-card"><div class="big-emoji">⚙️</div><h1>Parent Settings</h1><p>This first version keeps saved stories in this browser on this device.</p><div class="privacy-note">🔒 <b>Child privacy:</b> Only a parent’s email is used to log in. For each child we keep a first name or nickname, age and interests so stories fit them. No child photos, locations or contact details are asked for. Stories and progress stay on this device.</div><p class="pages-demo-note">This is a local browser demo. It does not create accounts or send story data to a server. Clearing this browser’s site data removes saved stories and progress.</p>
+      <div class="account-box" id="account-box"><p>Signed in as <b id="account-email"></b></p><div class="account-actions"><button class="small-button" id="logout-button" type="button">Log out</button><button class="small-button danger" id="delete-account-button" type="button">Delete my account</button></div></div><button class="small-button danger" id="clear-stories">Delete all saved stories</button></div></section>
   </main>
   <footer>Little Minds World <span>💛</span> Imagine. Discover. Think. Learn. Grow.</footer>
 </div>

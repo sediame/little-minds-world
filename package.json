@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "private": true,
   "description": "A child-friendly personalised story MVP",
-  "scripts": {"start": "node server.js"},
+  "scripts": {
+    "start": "node server.js",
+    "build": "node scripts/build-pages.js",
+    "test": "node --test"
+  },
   "engines": {"node": ">=18"}
 }

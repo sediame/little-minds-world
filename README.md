@@ -15,6 +15,13 @@
 3. Run `npm start` (or `node server.js`).
 4. Open http://localhost:3000.
 
+## GitHub Actions and GitHub Pages
+The workflow in `.github/workflows/pages.yml` builds and tests the static demo for pushes to `main` and pull requests targeting `main`. Successful pushes to `main` are published automatically to GitHub Pages; a manual run is also available from the Actions tab. The first deployment requires GitHub Pages to be configured to use **GitHub Actions** as its build and deployment source in the repository settings.
+
+GitHub Pages for a private repository requires a GitHub plan that supports private-repository Pages. If the repository’s plan does not support it, either upgrade the plan or publish from a public repository.
+
+GitHub Pages only hosts static files. The deployed Pages site is a browser-only demo: it uses built-in story templates and stores stories and progress in that browser. It does not provide parent accounts, AI stories, or AI chapter illustrations. Those features need a separately hosted Node.js backend; the GitHub Actions runner is temporary and does not host the app server.
+
 ## Enable real AI story generation
 1. Copy `.env.example` to `.env`.
 2. Add your OpenAI API key to `OPENAI_API_KEY`.

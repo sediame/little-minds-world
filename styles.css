@@ -533,6 +533,19 @@ select.field-input{appearance:none;-webkit-appearance:none;padding-right:44px;cu
 .profile-tile .age{font-weight:800}
 .tone-0{--c:#ffc45c}.tone-1{--c:#6fdcd3}.tone-2{--c:#ffa9c8}.tone-3{--c:#9be26f}.tone-4{--c:#c4abff}.tone-5{--c:#8fd0ff}
 
+.pages-demo{display:none}
+body[data-static-demo="true"] .pages-demo{display:grid;gap:14px}
+body[data-static-demo="true"] .pages-demo p{margin:0}
+body[data-static-demo="true"] .pages-demo .primary-button{margin-top:8px}
+body[data-static-demo="true"] .auth-tabs,
+body[data-static-demo="true"] #login-form,
+body[data-static-demo="true"] #signup-form,
+body[data-static-demo="true"] #auth-notice,
+body[data-static-demo="true"] #auth-error,
+body[data-static-demo="true"] .privacy-note{display:none}
+.pages-demo-note{display:none}
+body[data-static-demo="true"] .pages-demo-note{display:block}
+
 /* parents + settings */
 .family-panel{margin-top:24px}
 .family-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px}
